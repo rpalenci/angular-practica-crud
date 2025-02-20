@@ -1,32 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CarsService } from '../../../../services/cars-service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-crud-table-component',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, HttpClientModule],
+  providers: [CarsService],
   templateUrl: './crud-table-component.html',
-  styleUrl: './crud-table-component.css'
+  styleUrl: './crud-table-component.css',
 })
-export class CrudTableComponent {
-  cars = [
-    { id: '10221', marca: "Peugeot", modelo: '208 GT', total:"22000" },
-    { id: '10222', marca: "Peugeot", modelo: '208 GT Line', total:"20000" },
-    { id: '10223', marca: "Peugeot", modelo: '208', total:"16000" },
-  ];
+export class CrudTableComponent implements OnInit {
+  cars: any[] = [];
 
-  addCar(){
-    console.log("add");
+  constructor(private carsService: CarsService) {}
+
+  ngOnInit(): void {
+    this.carsService.getCars().subscribe(
+      (data: any) => {
+        this.cars = data;
+        console.log('Coches obtenidos:', this.cars);
+      },
+      (error) => {
+        console.log('Error al obtener los coches:', error);
+      }
+    );
   }
 
-  editCar(car:any ) {
-    console.log(car.id+"edit");
+  addCar() {
+    console.log('add');
   }
 
-  deleteCar(car:any){
-    console.log(car.id+"delete");
+  editCar(car: any) {
+    console.log(car.id + 'edit');
   }
 
-  detailCar(car: any){
-    console.log(car.id +"detail");
+  deleteCar(car: any) {
+    console.log(car.id + 'delete');
+  }
+
+  detailCar(car: any) {
+    console.log(car.id + 'detail');
   }
 }
