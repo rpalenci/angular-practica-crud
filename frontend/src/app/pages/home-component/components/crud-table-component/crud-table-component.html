@@ -1,0 +1,47 @@
+<div class="relative overflow-x-auto">
+  <button (click)="addCar()"
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">
+    Añadir coche
+  </button>
+  <table
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+  >
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    >
+      <tr>
+        <th scope="col" class="px-6 py-3">ID</th>
+        <th scope="col" class="px-6 py-3">Marca</th>
+        <th scope="col" class="px-6 py-3">Modelo</th>
+        <th scope="col" class="px-6 py-3">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+        *ngFor="let car of cars"
+      >
+        <th class="px-6 py-4">
+          <a href="#" (click)="detailCar(car)" class="font-medium text-black hover:underline"
+            >{{car.id}}</a
+          >
+        </th>
+        <td class="px-6 py-4">{{ car.marca }}</td>
+        <td class="px-6 py-4">{{ car.modelo }}</td>
+        <td class="px-6 py-4">{{ car.total }}€</td>
+        <td class="px-6 py-4">
+          <button (click)="editCar(car)"
+            class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mr-5 cursor-pointer"
+          >
+            Editar
+          </button>
+          <button (click)="deleteCar(car)"
+            class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded cursor-pointer"
+          >
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
